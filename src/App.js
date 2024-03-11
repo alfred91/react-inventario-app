@@ -1,23 +1,36 @@
-import logo from './logo.svg';
+// App.js
+import React, { useState } from 'react';
 import './App.css';
+import Login from './components/Login';
+import InventarioTable from './components/InventarioTable';
 
 function App() {
+  const [token, setToken] = useState('');
+
+  const handleLogin = (token) => {
+    setToken(token);
+  };
+
+  const handleLogout = () => {
+    setToken('');
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="App-header flex justify-between items-center w-full p-4">
+        <h1>Inventario</h1>
+        {token && (
+          <button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 text-sm rounded">
+            Cerrar sesión
+          </button>
+
+        )}
       </header>
+      {!token ? (
+        <Login onLogin={handleLogin} />
+      ) : (
+        <InventarioTable token={token} onLogout={handleLogout} />
+      )}
     </div>
   );
 }
