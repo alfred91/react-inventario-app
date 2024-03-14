@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function InventarioTable({ token, onLogout }) {
+
+function InventarioTable({ token }) {
+
+    // Almacenar los items del inventario
     const [items, setItems] = useState([]);
 
+    // Cargar los items del inventario al montar el componente
     useEffect(() => {
         axios.get('http://44.193.185.234/api/v1/inventario', {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}` // Uso del token
             }
         })
             .then(response => {
-                setItems(response.data.data);
+                setItems(response.data.data); // Actualización del estado con los datos
             })
             .catch(error => console.log(error));
     }, [token]);
 
+    // Renderizado del componente
     return (
-
         <div className="container mx-auto mt-8">
             <div className="flex flex-col">
                 <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -86,5 +90,5 @@ function InventarioTable({ token, onLogout }) {
     );
 
 }
-
+// Exportación del componente para su uso en otras partes de la aplicación
 export default InventarioTable;
