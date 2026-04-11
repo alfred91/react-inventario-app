@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API_URL;
 
 function InventarioTable({ token }) {
 
@@ -9,7 +10,7 @@ function InventarioTable({ token }) {
 
     // Cargar los items del inventario al montar el componente
     useEffect(() => {
-        axios.get('http://44.193.185.234/api/v1/inventario', {
+        axios.get(`${API_URL}/api/v1/inventario`, {
             headers: {
                 'Authorization': `Bearer ${token}` // Uso del token
             }

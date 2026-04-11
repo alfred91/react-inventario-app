@@ -5,13 +5,15 @@ import Login from './components/Login';
 import InventarioTable from './components/InventarioTable';
 
 function App() {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState(sessionStorage.getItem('auth_token') || '');
 
   const handleLogin = (token) => {
+    sessionStorage.setItem('auth_token', token);
     setToken(token);
   };
 
   const handleLogout = () => {
+    sessionStorage.removeItem('auth_token');
     setToken('');
   };
 
