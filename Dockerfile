@@ -9,6 +9,4 @@ COPY . .
 
 EXPOSE 3000
 
-ENV CHOKIDAR_USEPOLLING=true
-
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
